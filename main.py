@@ -14,6 +14,11 @@ parser.add_argument('-f', '--file', type=str,
                     default='text', help='File to type')
 parser.add_argument('-d', '--delay', type=int, default=5,
                     help='Delay in seconds before typing starts')
+parser.add_argument('--typo-rate', type=float, default=0.05,
+                    help='Typo rate as a float (default: 0.05)')
+parser.add_argument('--pause-rate', type=float, default=0.05,
+                    help='Pause rate as a float (default: 0.05)')
+
 args = parser.parse_args()
 
 if args.inverse is not None:
@@ -45,6 +50,7 @@ def type_word(word: str):
         else:
             pyautogui.typewrite(letter)
         time.sleep(SPEED + ((SPEED/5) * random.random()))
+
 
 def insert_typo(word: str) -> str:
     # Select a random index to insert the typo
@@ -82,11 +88,11 @@ for word in words:
         continue
 
     # This is a random event that will cause the writer to stop typing for a few seconds
-    elif random.random() < 0.05:
+    elif random.random() < args.pause_rate:
         time.sleep(SPEED*20 * random.random())
 
     # This is a random event that will cause the writer to make a typo
-    elif random.random() < 0.05:
+    elif random.random() < args.typo_rate:
         type_word(insert_typo(word))
 
         time.sleep(SPEED + (SPEED/5 * random.random()))

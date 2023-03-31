@@ -23,6 +23,8 @@ To use WriteMate, run the `typewriter.py` script with the following arguments:
 - `-i/--inverse/--inverse-speed`: Typing speed as the inverse of characters per second (overrides `-s/--speed`)
 - `-f/--file`: File containing the text to type (default: text)
 - `-d/--delay`: Delay in seconds before typing starts (default: 5)
+- `--typo-rate`: Typo rate as a float (default: 0.05)
+- `--pause-rate`: Pause rate as a float (default: 0.05)
 
 For example:
 
