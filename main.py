@@ -46,17 +46,6 @@ def type_word(word: str):
             pyautogui.typewrite(letter)
         time.sleep(SPEED + ((SPEED/5) * random.random()))
 
-# def type_word(word: str):
-#     for letter in word:
-#         if letter == '\n':
-#             pyautogui.typewrite('enter')
-#         elif letter in string.printable and letter not in [' ', '\t']:
-#             pyautogui.press(letter)
-#         else:
-#             pyautogui.typewrite(letter)
-#         time.sleep(SPEED + ((SPEED/5) * random.random()))
-
-
 def insert_typo(word: str) -> str:
     # Select a random index to insert the typo
     typo_index = random.randint(0, len(word))
