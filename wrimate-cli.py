@@ -48,7 +48,7 @@ def countdown(seconds: int):
 
 parser = argparse.ArgumentParser(
     description='Type out text with typos and pauses')
-parser.add_argument('--text', '-t', type=str, default=None,
+parser.add_argument('text', nargs='*', type=str, default=None,
                     help='the text to be typed out')
 parser.add_argument('--speed', '-s', type=float, default=0.5,
                     help='the typing speed (default: 0.5)')
@@ -65,6 +65,12 @@ parser.add_argument('--verbose', '-v', action='store_true',
 
 args = parser.parse_args()
 
+if args.text:
+    args.text = ' '.join(args.text)
+
+if not sys.stdin.isatty():
+    args.text = sys.stdin.read().splitlines()[0]
+
 if args.inverse_speed is not None and args.speed != 0.5:
     print('Warning: Both --speed and --inverse-speed were specified. Ignoring --speed.')
 
@@ -77,6 +83,8 @@ if args.load_from_file and args.text:
     print('Warning: Both text and --load-from-file were specified. Ignoring --text.')
 
 if __name__ == '__main__':
+    countdown(3)
+
     wm = WriteMate(text=args.text, speed=args.speed, inverse_speed=args.inverse_speed,
                    typo_rate=args.typo_rate, pause_rate=args.pause_rate, verbose=args.verbose, load_from_file=args.load_from_file)
 
