@@ -19,6 +19,8 @@ class WriteMate:
         elif load_from_file:
             self.load_from_file()
 
+        self.before_typing_word: callable = lambda: None
+
     def load_from_file(self, filename='text'):
         with open(filename, 'r') as f:
             text = f.read()
@@ -58,6 +60,7 @@ class WriteMate:
 
     def type_next_word(self):
         # This is the end of a sentence, so we are going to give more delay to simulate the writer taking a breath to
+        self.before_typing_word()
         # start a new sentence.
         word = self.words.pop(0)
         if word.endswith(".") or word.endswith("!") or word.endswith("?") or word.endswith(","):
@@ -94,6 +97,9 @@ class WriteMate:
         while len(self.words) > 0:
             self.type_next_word()
         self.log('Done typing text!')
+
+    def set_before_typing_word(self, do: callable):
+        self.before_typing_word = do
 
 
 if __name__ == '__main__':
