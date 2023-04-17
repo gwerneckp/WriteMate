@@ -20,7 +20,7 @@ pip install pyautogui argparse
 To run the CLI, use the following command:
 
 ```
-python typewriter.py [options]
+python wrimate-cli.py [options]
 ```
 
 Where the arguments are:
@@ -36,7 +36,7 @@ Where the arguments are:
 For example:
 
 ```
-python typewriter.py -s 0.3 -f my_text.txt
+python wrimate-cli.py -s 0.3 -f my_text.txt
 ```
 
 This will type the contents of the `my_text.txt` file at a speed of 0.3 seconds per character, with a delay of 5 seconds before typing starts.
